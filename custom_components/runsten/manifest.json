@@ -1,8 +1,10 @@
 {
   "domain": "runsten",
   "name": "Runsten",
+  "categories": ["vehicles_transport.cars_evs", "energy.ev_charging"],
   "codeowners": ["@vcanuel"],
   "config_flow": true,
+  "dependencies": ["auth"],
   "documentation": "https://github.com/runsten-app/runsten-homeassistant",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
