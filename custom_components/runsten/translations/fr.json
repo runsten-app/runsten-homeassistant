@@ -1,0 +1,194 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Se connecter à Runsten",
+        "description": "Collez un jeton d'accès personnel de votre compte Runsten : dans Runsten, Réglages, Accès à l'API, Nouveau jeton d'accès. Il ne fait que lire vos données, et vous pouvez le révoquer au même endroit.",
+        "data": {
+          "token": "Jeton d'accès"
+        },
+        "data_description": {
+          "token": "Commence par rst_."
+        },
+        "sections": {
+          "advanced": {
+            "name": "Réglages avancés",
+            "data": {
+              "url": "URL de Runsten"
+            },
+            "data_description": {
+              "url": "Gardez {default_url}, sauf si vous hébergez Runsten vous-même : alors l'adresse de votre instance."
+            }
+          }
+        }
+      },
+      "reauth_confirm": {
+        "title": "Runsten a refusé le jeton d'accès",
+        "description": "Le jeton d'accès de {url} a été révoqué ou a expiré. Collez-en un nouveau : dans Runsten, Réglages, Accès à l'API.",
+        "data": {
+          "token": "Jeton d'accès"
+        },
+        "data_description": {
+          "token": "Commence par rst_."
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Runsten a refusé le jeton d'accès : il est peut-être révoqué ou expiré.",
+      "cannot_connect": "Impossible de joindre Runsten à cette adresse.",
+      "invalid_token": "Un jeton d'accès Runsten commence par rst_.",
+      "invalid_url": "Cette adresse n'est pas valide."
+    },
+    "abort": {
+      "already_configured": "Ce compte est déjà connecté.",
+      "reauth_successful": "Le jeton d'accès a été remplacé."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options de Runsten",
+        "data": {
+          "track_location": "Suivre la position des véhicules"
+        },
+        "data_description": {
+          "track_location": "Un suivi d'appareil par véhicule, à sa dernière position connue. Désactivé, les suivis sont supprimés."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "range": {
+        "name": "Autonomie"
+      },
+      "charging_status": {
+        "name": "État de charge",
+        "state": {
+          "idle": "Au repos",
+          "charging": "En charge",
+          "done": "Terminée",
+          "scheduled": "Programmée",
+          "discharging": "En décharge",
+          "error": "Erreur"
+        }
+      },
+      "charge_type": {
+        "name": "Type de charge",
+        "state": {
+          "ac": "AC",
+          "dc": "DC",
+          "none": "Aucune"
+        }
+      },
+      "charging_power": {
+        "name": "Puissance de charge"
+      },
+      "target_soc": {
+        "name": "Limite de charge"
+      },
+      "odometer": {
+        "name": "Odomètre"
+      },
+      "read_at": {
+        "name": "Dernière lecture"
+      },
+      "outside_temperature": {
+        "name": "Température extérieure"
+      },
+      "cabin_temperature": {
+        "name": "Température de l'habitacle"
+      },
+      "openings_read_at": {
+        "name": "Dernière lecture des portes"
+      }
+    },
+    "binary_sensor": {
+      "plug": {
+        "name": "Prise"
+      },
+      "charging": {
+        "name": "En charge"
+      },
+      "engine": {
+        "name": "Moteur"
+      },
+      "credential": {
+        "name": "Identifiant"
+      },
+      "climate": {
+        "name": "Climatisation"
+      },
+      "preconditioning": {
+        "name": "Préconditionnement"
+      },
+      "battery_heater": {
+        "name": "Chauffage de la batterie"
+      },
+      "lock": {
+        "name": "Verrouillage"
+      },
+      "door_front_left": {
+        "name": "Porte avant gauche"
+      },
+      "door_front_right": {
+        "name": "Porte avant droite"
+      },
+      "door_rear_left": {
+        "name": "Porte arrière gauche"
+      },
+      "door_rear_right": {
+        "name": "Porte arrière droite"
+      },
+      "hood": {
+        "name": "Capot"
+      },
+      "tailgate": {
+        "name": "Hayon"
+      },
+      "tank_lid": {
+        "name": "Trappe de carburant"
+      },
+      "window_front_left": {
+        "name": "Vitre avant gauche"
+      },
+      "window_front_right": {
+        "name": "Vitre avant droite"
+      },
+      "window_rear_left": {
+        "name": "Vitre arrière gauche"
+      },
+      "window_rear_right": {
+        "name": "Vitre arrière droite"
+      },
+      "sunroof": {
+        "name": "Toit ouvrant"
+      },
+      "sentry": {
+        "name": "Mode Sentinelle"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Position"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Runsten a refusé le jeton d'accès."
+    },
+    "rate_limited": {
+      "message": "Trop de requêtes à Runsten avec ce jeton d'accès ; nouvel essai plus tard."
+    },
+    "cannot_connect": {
+      "message": "Impossible de lire Runsten : {error}"
+    }
+  },
+  "issues": {
+    "free_plan": {
+      "title": "Runsten Gratuit lit vos véhicules toutes les {minutes} minutes",
+      "description": "Votre compte Runsten est en Gratuit : ses véhicules sont lus toutes les {minutes} minutes, leurs valeurs ne changent donc ici qu'à ce rythme, et une automatisation peut se déclencher en retard. Plus les lit en temps réel, chaque minute en trajet ou en charge.\n\nVous pouvez ignorer ce message : l'intégration fonctionne de la même façon."
+    }
+  }
+}

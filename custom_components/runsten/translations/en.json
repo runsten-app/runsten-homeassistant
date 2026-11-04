@@ -1,0 +1,194 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Runsten",
+        "description": "Paste a personal access token of your Runsten account: in Runsten, Settings, API access, New access token. It only reads your data, and you can revoke it there.",
+        "data": {
+          "token": "Access token"
+        },
+        "data_description": {
+          "token": "Starts with rst_."
+        },
+        "sections": {
+          "advanced": {
+            "name": "Advanced settings",
+            "data": {
+              "url": "Runsten URL"
+            },
+            "data_description": {
+              "url": "Keep {default_url}, unless you host Runsten yourself: then your instance's address."
+            }
+          }
+        }
+      },
+      "reauth_confirm": {
+        "title": "Runsten refused the access token",
+        "description": "The access token of {url} was revoked or has expired. Paste a new one: in Runsten, Settings, API access.",
+        "data": {
+          "token": "Access token"
+        },
+        "data_description": {
+          "token": "Starts with rst_."
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Runsten refused the access token: it may be revoked or expired.",
+      "cannot_connect": "Could not reach Runsten at this address.",
+      "invalid_token": "A Runsten access token starts with rst_.",
+      "invalid_url": "This is not a valid address."
+    },
+    "abort": {
+      "already_configured": "This account is already connected.",
+      "reauth_successful": "The access token was replaced."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Runsten options",
+        "data": {
+          "track_location": "Track the vehicles' position"
+        },
+        "data_description": {
+          "track_location": "A device tracker for each vehicle, at its latest known position. Turned off, the trackers are removed."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "range": {
+        "name": "Range"
+      },
+      "charging_status": {
+        "name": "Charging status",
+        "state": {
+          "idle": "Idle",
+          "charging": "Charging",
+          "done": "Done",
+          "scheduled": "Scheduled",
+          "discharging": "Discharging",
+          "error": "Error"
+        }
+      },
+      "charge_type": {
+        "name": "Charge type",
+        "state": {
+          "ac": "AC",
+          "dc": "DC",
+          "none": "None"
+        }
+      },
+      "charging_power": {
+        "name": "Charging power"
+      },
+      "target_soc": {
+        "name": "Charge limit"
+      },
+      "odometer": {
+        "name": "Odometer"
+      },
+      "read_at": {
+        "name": "Last read"
+      },
+      "outside_temperature": {
+        "name": "Outside temperature"
+      },
+      "cabin_temperature": {
+        "name": "Cabin temperature"
+      },
+      "openings_read_at": {
+        "name": "Doors last read"
+      }
+    },
+    "binary_sensor": {
+      "plug": {
+        "name": "Plug"
+      },
+      "charging": {
+        "name": "Charging"
+      },
+      "engine": {
+        "name": "Engine"
+      },
+      "credential": {
+        "name": "Credential"
+      },
+      "climate": {
+        "name": "Climate"
+      },
+      "preconditioning": {
+        "name": "Preconditioning"
+      },
+      "battery_heater": {
+        "name": "Battery heater"
+      },
+      "lock": {
+        "name": "Lock"
+      },
+      "door_front_left": {
+        "name": "Door front left"
+      },
+      "door_front_right": {
+        "name": "Door front right"
+      },
+      "door_rear_left": {
+        "name": "Door rear left"
+      },
+      "door_rear_right": {
+        "name": "Door rear right"
+      },
+      "hood": {
+        "name": "Hood"
+      },
+      "tailgate": {
+        "name": "Tailgate"
+      },
+      "tank_lid": {
+        "name": "Tank lid"
+      },
+      "window_front_left": {
+        "name": "Window front left"
+      },
+      "window_front_right": {
+        "name": "Window front right"
+      },
+      "window_rear_left": {
+        "name": "Window rear left"
+      },
+      "window_rear_right": {
+        "name": "Window rear right"
+      },
+      "sunroof": {
+        "name": "Sunroof"
+      },
+      "sentry": {
+        "name": "Sentry Mode"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Location"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Runsten refused the access token."
+    },
+    "rate_limited": {
+      "message": "Too many requests to Runsten with this access token; retrying later."
+    },
+    "cannot_connect": {
+      "message": "Could not read Runsten: {error}"
+    }
+  },
+  "issues": {
+    "free_plan": {
+      "title": "Runsten Free reads your vehicles every {minutes} minutes",
+      "description": "Your Runsten account is on Free: its vehicles are read every {minutes} minutes, so their values change here only that often, and an automation may run late. Plus reads them in real time, every minute while driving or charging.\n\nYou can ignore this message: the integration works the same."
+    }
+  }
+}
