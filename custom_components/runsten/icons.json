@@ -1,0 +1,24 @@
+{
+  "entity": {
+    "sensor": {
+      "range": { "default": "mdi:map-marker-distance" },
+      "charging_status": { "default": "mdi:ev-station" },
+      "charge_type": { "default": "mdi:ev-plug-type2" },
+      "target_soc": { "default": "mdi:battery-charging-80" },
+      "odometer": { "default": "mdi:counter" },
+      "read_at": { "default": "mdi:clock-check-outline" },
+      "openings_read_at": { "default": "mdi:car-door" }
+    },
+    "binary_sensor": {
+      "engine": { "default": "mdi:engine-off", "state": { "on": "mdi:engine" } },
+      "climate": { "default": "mdi:fan-off", "state": { "on": "mdi:fan" } },
+      "preconditioning": { "default": "mdi:car-defrost-front" },
+      "battery_heater": { "default": "mdi:heat-wave" },
+      "credential": { "default": "mdi:key-alert" },
+      "sentry": { "default": "mdi:cctv-off", "state": { "on": "mdi:cctv" } }
+    },
+    "device_tracker": {
+      "location": { "default": "mdi:car" }
+    }
+  }
+}

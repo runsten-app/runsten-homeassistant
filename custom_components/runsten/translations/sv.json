@@ -1,0 +1,194 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Anslut till Runsten",
+        "description": "Klistra in en personlig åtkomsttoken för ditt Runsten-konto: i Runsten, Inställningar, API-åtkomst, Ny åtkomsttoken. Den läser bara dina data, och du kan återkalla den där.",
+        "data": {
+          "token": "Åtkomsttoken"
+        },
+        "data_description": {
+          "token": "Börjar med rst_."
+        },
+        "sections": {
+          "advanced": {
+            "name": "Avancerade inställningar",
+            "data": {
+              "url": "Runstens URL"
+            },
+            "data_description": {
+              "url": "Behåll {default_url}, om du inte driver Runsten själv: ange då din instans adress."
+            }
+          }
+        }
+      },
+      "reauth_confirm": {
+        "title": "Runsten avvisade åtkomsttoken",
+        "description": "Åtkomsttoken för {url} har återkallats eller gått ut. Klistra in en ny: i Runsten, Inställningar, API-åtkomst.",
+        "data": {
+          "token": "Åtkomsttoken"
+        },
+        "data_description": {
+          "token": "Börjar med rst_."
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Runsten avvisade åtkomsttoken: den kan vara återkallad eller utgången.",
+      "cannot_connect": "Det gick inte att nå Runsten på den här adressen.",
+      "invalid_token": "En åtkomsttoken för Runsten börjar med rst_.",
+      "invalid_url": "Adressen är inte giltig."
+    },
+    "abort": {
+      "already_configured": "Kontot är redan anslutet.",
+      "reauth_successful": "Åtkomsttoken har bytts ut."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Alternativ för Runsten",
+        "data": {
+          "track_location": "Spåra fordonens position"
+        },
+        "data_description": {
+          "track_location": "En enhetsspårare per fordon, på dess senast kända position. Avstängt tas spårarna bort."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "range": {
+        "name": "Räckvidd"
+      },
+      "charging_status": {
+        "name": "Laddningsstatus",
+        "state": {
+          "idle": "Vilar",
+          "charging": "Laddar",
+          "done": "Klar",
+          "scheduled": "Schemalagd",
+          "discharging": "Urladdning",
+          "error": "Fel"
+        }
+      },
+      "charge_type": {
+        "name": "Laddningstyp",
+        "state": {
+          "ac": "AC",
+          "dc": "DC",
+          "none": "Ingen"
+        }
+      },
+      "charging_power": {
+        "name": "Laddningseffekt"
+      },
+      "target_soc": {
+        "name": "Laddningsgräns"
+      },
+      "odometer": {
+        "name": "Mätarställning"
+      },
+      "read_at": {
+        "name": "Senast läst"
+      },
+      "outside_temperature": {
+        "name": "Utomhustemperatur"
+      },
+      "cabin_temperature": {
+        "name": "Kupétemperatur"
+      },
+      "openings_read_at": {
+        "name": "Dörrar senast lästa"
+      }
+    },
+    "binary_sensor": {
+      "plug": {
+        "name": "Kontakt"
+      },
+      "charging": {
+        "name": "Laddar"
+      },
+      "engine": {
+        "name": "Motor"
+      },
+      "credential": {
+        "name": "Inloggningsuppgift"
+      },
+      "climate": {
+        "name": "Klimat"
+      },
+      "preconditioning": {
+        "name": "Förkonditionering"
+      },
+      "battery_heater": {
+        "name": "Batterivärmare"
+      },
+      "lock": {
+        "name": "Lås"
+      },
+      "door_front_left": {
+        "name": "Dörr vänster fram"
+      },
+      "door_front_right": {
+        "name": "Dörr höger fram"
+      },
+      "door_rear_left": {
+        "name": "Dörr vänster bak"
+      },
+      "door_rear_right": {
+        "name": "Dörr höger bak"
+      },
+      "hood": {
+        "name": "Motorhuv"
+      },
+      "tailgate": {
+        "name": "Baklucka"
+      },
+      "tank_lid": {
+        "name": "Tanklock"
+      },
+      "window_front_left": {
+        "name": "Fönster vänster fram"
+      },
+      "window_front_right": {
+        "name": "Fönster höger fram"
+      },
+      "window_rear_left": {
+        "name": "Fönster vänster bak"
+      },
+      "window_rear_right": {
+        "name": "Fönster höger bak"
+      },
+      "sunroof": {
+        "name": "Taklucka"
+      },
+      "sentry": {
+        "name": "Vaktläge"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Position"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Runsten avvisade åtkomsttoken."
+    },
+    "rate_limited": {
+      "message": "För många förfrågningar till Runsten med den här åtkomsttoken; försöker igen senare."
+    },
+    "cannot_connect": {
+      "message": "Det gick inte att läsa Runsten: {error}"
+    }
+  },
+  "issues": {
+    "free_plan": {
+      "title": "Runsten Gratis läser dina fordon var {minutes}:e minut",
+      "description": "Ditt Runsten-konto har Gratis: dess fordon läses var {minutes}:e minut, så deras värden ändras här bara så ofta, och en automation kan köras sent. Plus läser dem i realtid, varje minut under körning eller laddning.\n\nDu kan ignorera meddelandet: integrationen fungerar likadant."
+    }
+  }
+}
