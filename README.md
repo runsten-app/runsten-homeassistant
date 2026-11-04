@@ -19,10 +19,22 @@ Requires Home Assistant 2025.8 or later (tested with 2026.10).
 
 ## Connect
 
+In Home Assistant: **Settings → Devices & services → Add integration → Runsten**, then
+**Sign in with Runsten**. Runsten opens in your browser: sign in, check what Home Assistant will
+read, and allow it. You come back to Home Assistant through
+[My Home Assistant](https://my.home-assistant.io), which asks once for your instance's address.
+
+Home Assistant then appears in Runsten under **Settings → Connected apps**, where you can
+disconnect it: Home Assistant then asks you to sign in again. It stays connected as long as it
+reads your account at least once every 30 days.
+
+### With an access token
+
+Choose **Use an access token** instead:
+
 1. In Runsten: **Settings → API access → New access token**. Copy the token (it starts with
    `rst_`). It only reads your data; you can revoke it there at any time.
-2. In Home Assistant: **Settings → Devices & services → Add integration → Runsten**, and paste
-   the token.
+2. In Home Assistant, paste the token.
 
 Each vehicle becomes a device, named as in Runsten (never by its VIN).
 
@@ -34,7 +46,7 @@ them in real time (every minute while driving or charging).
 
 ### A self-hosted Runsten
 
-Open **Advanced settings** in the form and replace `https://my.runsten.app` with your instance's
+Choose **Use an access token**, open **Advanced settings** in the form and replace `https://my.runsten.app` with your instance's
 address, then paste a token of that instance. The integration reads the instance's API,
 `/api/v1`, with the same entities; there is no offer and no repair.
 

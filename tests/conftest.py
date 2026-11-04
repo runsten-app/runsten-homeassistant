@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import time
 from typing import Any
 
 from homeassistant.const import CONF_TOKEN, CONF_URL
@@ -16,6 +17,11 @@ from custom_components.runsten.const import CONF_HOSTED, DOMAIN
 URL = "https://my.runsten.app"
 HOSTED = URL + "/api/cloud/homeassistant/"
 TOKEN = "rst_0123456789abcdef"
+
+ACCOUNT_ID = "5a1c0000-0000-4000-8000-0000000000aa"
+# The tokens of a sign-in with Runsten.
+ACCESS_TOKEN = "rso_access"
+REFRESH_TOKEN = "rsr_refresh"
 
 VOLVO_ID = "0b1c2d3e-0000-4000-8000-000000000001"
 TESLA_ID = "7e5a1a00-0000-4000-8000-000000000002"
@@ -188,6 +194,7 @@ STATES: list[dict[str, Any]] = [
 def account(plan: str = "plus") -> dict[str, Any]:
     """The hosted account's offer."""
     return {
+        "account_id": ACCOUNT_ID,
         "plan": plan,
         "plus_until": "2027-11-04T00:00:00Z" if plan == "plus" else None,
         "read_every_s": 60 if plan == "plus" else 3600,
@@ -220,6 +227,28 @@ def hosted_entry(**options: Any) -> MockConfigEntry:
         domain=DOMAIN,
         title="my.runsten.app",
         data={CONF_URL: URL, CONF_TOKEN: TOKEN, CONF_HOSTED: True},
+        options=options,
+    )
+
+
+def oauth_entry(expires_in: float = 3600, **options: Any) -> MockConfigEntry:
+    """A configuration entry signed in with Runsten, its access token valid so long."""
+    return MockConfigEntry(
+        domain=DOMAIN,
+        title="my.runsten.app",
+        unique_id=ACCOUNT_ID,
+        data={
+            "auth_implementation": DOMAIN,
+            "token": {
+                "access_token": ACCESS_TOKEN,
+                "refresh_token": REFRESH_TOKEN,
+                "token_type": "Bearer",
+                "expires_in": 3600,
+                "expires_at": time.time() + expires_in,
+            },
+            CONF_URL: URL,
+            CONF_HOSTED: True,
+        },
         options=options,
     )
 

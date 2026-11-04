@@ -3,6 +3,14 @@
     "step": {
       "user": {
         "title": "Se connecter à Runsten",
+        "description": "Connectez-vous avec votre compte Runsten sur my.runsten.app, ou collez un jeton d'accès : pour une instance que vous hébergez vous-même, ou pour vous connecter sans vous identifier.",
+        "menu_options": {
+          "oauth": "Se connecter avec Runsten",
+          "token": "Utiliser un jeton d'accès"
+        }
+      },
+      "token": {
+        "title": "Se connecter avec un jeton d'accès",
         "description": "Collez un jeton d'accès personnel de votre compte Runsten : dans Runsten, Réglages, Accès à l'API, Nouveau jeton d'accès. Il ne fait que lire vos données, et vous pouvez le révoquer au même endroit.",
         "data": {
           "token": "Jeton d'accès"
@@ -31,6 +39,10 @@
         "data_description": {
           "token": "Commence par rst_."
         }
+      },
+      "reauth_oauth": {
+        "title": "Se reconnecter à Runsten",
+        "description": "Runsten ne laisse plus Home Assistant lire ce compte : il a été déconnecté dans Runsten, sous Réglages, Applications connectées, ou n'a pas servi depuis 30 jours. Reconnectez-vous avec le même compte."
       }
     },
     "error": {
@@ -41,7 +53,21 @@
     },
     "abort": {
       "already_configured": "Ce compte est déjà connecté.",
-      "reauth_successful": "Le jeton d'accès a été remplacé."
+      "reauth_successful": "L'accès a été renouvelé.",
+      "wrong_account": "C'est un autre compte Runsten : connectez-vous avec le compte de cette entrée.",
+      "cannot_connect": "Impossible de joindre Runsten.",
+      "missing_configuration": "La connexion avec Runsten n'est pas disponible.",
+      "oauth_implementation_unavailable": "La connexion avec Runsten n'est pas disponible.",
+      "authorize_url_timeout": "La page de connexion de Runsten n'a pas pu être préparée à temps.",
+      "no_url_available": "Home Assistant n'a pas d'adresse où revenir après la connexion.",
+      "user_rejected_authorize": "La connexion avec Runsten a été refusée : {error}",
+      "oauth_error": "La réponse de Runsten à la connexion n'est pas valide.",
+      "oauth_failed": "Les jetons de Runsten n'ont pas pu être obtenus.",
+      "oauth_timeout": "Les jetons de Runsten n'ont pas pu être obtenus à temps.",
+      "oauth_unauthorized": "Runsten a refusé la connexion."
+    },
+    "create_entry": {
+      "default": "Connecté à Runsten."
     }
   },
   "options": {

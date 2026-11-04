@@ -3,6 +3,14 @@
     "step": {
       "user": {
         "title": "Anslut till Runsten",
+        "description": "Logga in med ditt Runsten-konto på my.runsten.app, eller klistra in en åtkomsttoken: för en instans du själv driver, eller för att ansluta utan att logga in.",
+        "menu_options": {
+          "oauth": "Logga in med Runsten",
+          "token": "Använd en åtkomsttoken"
+        }
+      },
+      "token": {
+        "title": "Anslut med en åtkomsttoken",
         "description": "Klistra in en personlig åtkomsttoken för ditt Runsten-konto: i Runsten, Inställningar, API-åtkomst, Ny åtkomsttoken. Den läser bara dina data, och du kan återkalla den där.",
         "data": {
           "token": "Åtkomsttoken"
@@ -31,6 +39,10 @@
         "data_description": {
           "token": "Börjar med rst_."
         }
+      },
+      "reauth_oauth": {
+        "title": "Logga in på Runsten igen",
+        "description": "Runsten låter inte längre Home Assistant läsa det här kontot: det kopplades från i Runsten, under Inställningar, Anslutna appar, eller har inte använts på 30 dagar. Logga in igen med samma konto."
       }
     },
     "error": {
@@ -41,7 +53,21 @@
     },
     "abort": {
       "already_configured": "Kontot är redan anslutet.",
-      "reauth_successful": "Åtkomsttoken har bytts ut."
+      "reauth_successful": "Åtkomsten förnyades.",
+      "wrong_account": "Det här är ett annat Runsten-konto: logga in med den här postens konto.",
+      "cannot_connect": "Kunde inte nå Runsten.",
+      "missing_configuration": "Inloggning med Runsten är inte tillgänglig.",
+      "oauth_implementation_unavailable": "Inloggning med Runsten är inte tillgänglig.",
+      "authorize_url_timeout": "Runstens inloggningssida kunde inte förberedas i tid.",
+      "no_url_available": "Home Assistant har ingen adress att återvända till efter inloggningen.",
+      "user_rejected_authorize": "Inloggningen med Runsten nekades: {error}",
+      "oauth_error": "Runstens svar på inloggningen är ogiltigt.",
+      "oauth_failed": "Runstens token kunde inte hämtas.",
+      "oauth_timeout": "Runstens token kunde inte hämtas i tid.",
+      "oauth_unauthorized": "Runsten nekade inloggningen."
+    },
+    "create_entry": {
+      "default": "Ansluten till Runsten."
     }
   },
   "options": {

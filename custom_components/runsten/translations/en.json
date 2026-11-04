@@ -3,6 +3,14 @@
     "step": {
       "user": {
         "title": "Connect to Runsten",
+        "description": "Sign in with your Runsten account at my.runsten.app, or paste an access token: for an instance you host yourself, or to connect without signing in.",
+        "menu_options": {
+          "oauth": "Sign in with Runsten",
+          "token": "Use an access token"
+        }
+      },
+      "token": {
+        "title": "Connect with an access token",
         "description": "Paste a personal access token of your Runsten account: in Runsten, Settings, API access, New access token. It only reads your data, and you can revoke it there.",
         "data": {
           "token": "Access token"
@@ -31,6 +39,10 @@
         "data_description": {
           "token": "Starts with rst_."
         }
+      },
+      "reauth_oauth": {
+        "title": "Sign in to Runsten again",
+        "description": "Runsten no longer lets Home Assistant read this account: it was disconnected in Runsten, under Settings, Connected apps, or not used for 30 days. Sign in again with the same account."
       }
     },
     "error": {
@@ -41,7 +53,21 @@
     },
     "abort": {
       "already_configured": "This account is already connected.",
-      "reauth_successful": "The access token was replaced."
+      "reauth_successful": "The access was renewed.",
+      "wrong_account": "This is another Runsten account: sign in with the account of this entry.",
+      "cannot_connect": "Could not reach Runsten.",
+      "missing_configuration": "Signing in with Runsten is not available.",
+      "oauth_implementation_unavailable": "Signing in with Runsten is not available.",
+      "authorize_url_timeout": "Runsten's sign-in page could not be prepared in time.",
+      "no_url_available": "Home Assistant has no URL to return to after the sign-in.",
+      "user_rejected_authorize": "Signing in with Runsten was refused: {error}",
+      "oauth_error": "Runsten's answer to the sign-in is not valid.",
+      "oauth_failed": "Runsten's tokens could not be obtained.",
+      "oauth_timeout": "Runsten's tokens could not be obtained in time.",
+      "oauth_unauthorized": "Runsten refused the sign-in."
+    },
+    "create_entry": {
+      "default": "Connected to Runsten."
     }
   },
   "options": {
