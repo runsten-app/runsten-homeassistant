@@ -230,6 +230,7 @@ async def test_valid_token_not_renewed(
     [
         (400, ConfigEntryState.SETUP_ERROR, True),
         (500, ConfigEntryState.SETUP_RETRY, False),
+        (429, ConfigEntryState.SETUP_RETRY, False),
     ],
 )
 async def test_renewal_refused(
@@ -240,7 +241,7 @@ async def test_renewal_refused(
     reauth: bool,
 ) -> None:
     """A renewal Runsten refuses (the grant revoked) asks to sign in again; a failure
-    of Runsten retries later.
+    of Runsten, a timeout or a rate limit, retries later.
     """
     aioclient_mock.post(OAUTH_TOKEN_URL, status=status, json={"error": "invalid_grant"})
     entry = oauth_entry(expires_in=-10)

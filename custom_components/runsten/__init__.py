@@ -59,7 +59,7 @@ async def _async_token_source(
 
     Runsten refusing the renewal (the grant revoked, or unused for 30 days) is an
     authentication error, which asks the user to sign in again; any other failure is
-    Runsten not answering.
+    Runsten not answering, a request timed out or limited (408, 429) among them.
     """
     implementation = (
         await config_entry_oauth2_flow.async_get_config_entry_implementation(
@@ -72,7 +72,9 @@ async def _async_token_source(
         try:
             await session.async_ensure_token_valid()
         except aiohttp.ClientResponseError as err:
-            if 400 <= err.status < 500:
+            # Home Assistant's own helper, in recent versions (2026.10), starts the reauth of
+            # a 408: only 429 is transient there.
+            if 400 <= err.status < 500 and err.status not in (408, 429):
                 raise RunstenAuthError from err
             raise RunstenConnectionError(f"token renewal: HTTP {err.status}") from err
         except (aiohttp.ClientError, TimeoutError) as err:
