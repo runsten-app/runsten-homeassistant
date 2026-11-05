@@ -161,7 +161,7 @@ STATES: list[dict[str, Any]] = [
             "preconditioning": _reading(False),
             "battery_heater": None,
         },
-        "software": None,
+        "software": _reading("2026.38.6"),
         "software_update": None,
         "doors": _reading(
             {
