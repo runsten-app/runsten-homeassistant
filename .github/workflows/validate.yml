@@ -24,5 +24,3 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
-          # No icon yet: brand/icon.png in custom_components/runsten, then drop this.
-          ignore: brands
