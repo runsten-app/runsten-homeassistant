@@ -5,18 +5,25 @@ from __future__ import annotations
 import base64
 import hashlib
 import time
+from unittest.mock import Mock, patch
 
+import aiohttp
 from homeassistant.config_entries import SOURCE_USER, ConfigEntryState
 from homeassistant.const import CONF_URL
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
-from homeassistant.helpers.config_entry_oauth2_flow import MY_AUTH_CALLBACK_PATH
+from homeassistant.helpers.config_entry_oauth2_flow import (
+    MY_AUTH_CALLBACK_PATH,
+    async_register_implementation,
+)
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 from pytest_homeassistant_custom_component.test_util.aiohttp import AiohttpClientMocker
 from pytest_homeassistant_custom_component.typing import ClientSessionGenerator
 from yarl import URL as YURL
 
+from custom_components.runsten import _async_token_source
+from custom_components.runsten.api import RunstenAuthError, RunstenConnectionError
 from custom_components.runsten.const import (
     CONF_HOSTED,
     DOMAIN,
@@ -25,6 +32,7 @@ from custom_components.runsten.const import (
     OAUTH_RESOURCE,
     OAUTH_TOKEN_URL,
 )
+from custom_components.runsten.oauth import RunstenImplementation
 
 from .conftest import (
     ACCESS_TOKEN,
@@ -251,6 +259,37 @@ async def test_renewal_refused(
     assert bool(flows) is reauth
     if reauth:
         assert flows[0]["step_id"] == "reauth_oauth"
+
+
+@pytest.mark.parametrize(
+    ("status", "error"),
+    [
+        (400, RunstenAuthError),
+        (401, RunstenAuthError),
+        (408, RunstenConnectionError),
+        (429, RunstenConnectionError),
+        (503, RunstenConnectionError),
+    ],
+)
+async def test_renewal_errors(
+    hass: HomeAssistant, status: int, error: type[Exception]
+) -> None:
+    """The integration's own reading of a renewal's status, whatever Home Assistant's
+    helper does first (recent versions start the reauth of a 408 themselves): only a
+    refusal asks to sign in again, not a timeout or a rate limit.
+    """
+    async_register_implementation(hass, DOMAIN, RunstenImplementation(hass))
+    entry = oauth_entry(expires_in=-10)
+    entry.add_to_hass(hass)
+    failure = aiohttp.ClientResponseError(Mock(), (), status=status)
+    with patch(
+        "homeassistant.helpers.config_entry_oauth2_flow.OAuth2Session"
+        ".async_ensure_token_valid",
+        side_effect=failure,
+    ):
+        token = await _async_token_source(hass, entry)
+        with pytest.raises(error):
+            await token()
 
 
 async def test_access_refused(
