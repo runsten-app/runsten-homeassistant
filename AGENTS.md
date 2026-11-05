@@ -10,11 +10,18 @@ A client of Runsten's API, in Python, inside Home Assistant:
 
 - **By default, the hosted offer** (`https://my.runsten.app`): its own routes under
   `/api/cloud/homeassistant/` (`account`, `vehicles`, `vehicles/{id}`, `vehicles/{id}/state`,
-  `states`), with a personal access token `rst_…`. `states` gives every vehicle in one request.
+  `states`). `states` gives every vehicle in one request. Signed in with Runsten (OAuth 2 with
+  PKCE, Home Assistant's `config_entry_oauth2_flow`): a public client whose `client_id` is the
+  URL of its metadata document, `https://runsten.app/homeassistant/client.json`, which names My
+  Home Assistant's `https://my.home-assistant.io/redirect/oauth` as its only redirection; every
+  request names the resource `https://my.runsten.app/api/cloud/homeassistant`, which its tokens
+  read only. The access token lasts an hour, the refresh token is renewed at each use and dies
+  after 30 days unused. Or with a personal access token `rst_…`.
 - **A self-hosted instance** (advanced settings of the form): the core's `/api/v1` with the same
   token, the same documents (`Vehicle`, `State`) vehicle by vehicle; no offer.
 - Which one is detected when the entry is made (`api.async_detect`: the hosted route answers, or
-  404) and stored in the entry (`hosted`).
+  404) and stored in the entry (`hosted`). An entry signed in with Runsten is the hosted offer's,
+  its unique ID the account's (`account_id` of `account`); one made with a token has none.
 
 The value is on the server: nothing secret or paid lives here. The client reads only what the
 hosted offer also relays, so that one code serves both.
@@ -23,12 +30,15 @@ hosted offer also relays, so that one code serves both.
 
 ```
 custom_components/runsten/
-  api.py             the client: errors, Account, hosted or core routes, detection
+  api.py             the client: errors, Account, hosted or core routes, detection; a token or
+                     a source of tokens
+  oauth.py           signing in with Runsten: the PKCE implementation, through My Home Assistant
   coordinator.py     DataUpdateCoordinator: states every minute; vehicles and offer hourly or
                      when a vehicle appears; device names (labels), stale devices, Free's repair
   entity.py          base entity, dynamic addition of each vehicle's entities, State readers
   sensor.py, binary_sensor.py, device_tracker.py
-  config_flow.py     token form (URL in a collapsed section), reauth, options (position)
+  config_flow.py     menu: sign in with Runsten (OAuth) or the token form (URL in a collapsed
+                     section); reauth of either kind; options (position)
   translations/      en, fr, sv: the same keys
   icons.json, manifest.json
 tests/               pytest-homeassistant-custom-component, the API mocked (aioclient_mock)

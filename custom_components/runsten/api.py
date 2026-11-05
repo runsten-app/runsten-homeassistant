@@ -3,12 +3,15 @@
 The hosted offer (my.runsten.app) serves the integration under its own prefix: the
 account's offer, the vehicles, and every vehicle's state in one request. Any other
 instance is read through the core's JSON API, /api/v1, the same documents vehicle by
-vehicle. Both take a personal access token (rst_…) as a bearer token.
+vehicle. Both take a personal access token (rst_…) as a bearer token; the hosted offer
+also takes the access token of a sign-in with Runsten (OAuth), which the client asks
+for before each request, renewed when it expires.
 """
 
 from __future__ import annotations
 
 import asyncio
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
@@ -23,6 +26,10 @@ TOKEN_PREFIX = "rst_"
 
 TIMEOUT = aiohttp.ClientTimeout(total=30)
 
+# A source of access tokens: a sign-in's, valid when returned. It raises RunstenError
+# when it cannot get one.
+type TokenSource = Callable[[], Awaitable[str]]
+
 
 class RunstenError(Exception):
     """Runsten did not answer as expected."""
@@ -33,7 +40,7 @@ class RunstenConnectionError(RunstenError):
 
 
 class RunstenAuthError(RunstenError):
-    """Runsten refused the token: invalid, expired or revoked."""
+    """Runsten refused the token, or its renewal: invalid, expired or revoked."""
 
 
 class RunstenNotFoundError(RunstenError):
@@ -53,6 +60,7 @@ class RunstenRateLimitedError(RunstenError):
 class Account:
     """The hosted account's offer."""
 
+    account_id: str | None  # tells one account from another
     plan: str  # free or plus
     plus_until: datetime | None
     read_every_s: int  # how often its values change at best
@@ -68,7 +76,12 @@ class RunstenClient:
     """Reads one account of one instance."""
 
     def __init__(
-        self, session: aiohttp.ClientSession, url: str, token: str, *, hosted: bool
+        self,
+        session: aiohttp.ClientSession,
+        url: str,
+        token: str | TokenSource,
+        *,
+        hosted: bool,
     ) -> None:
         """Read the instance at url with the token, through the hosted API or the core's."""
         self._session = session
@@ -83,6 +96,7 @@ class RunstenClient:
         data = await self._get(HOSTED_PREFIX + "account")
         until = data.get("plus_until")
         return Account(
+            account_id=data.get("account_id"),
             plan=data["plan"],
             plus_until=dt_util.parse_datetime(until) if until else None,
             read_every_s=int(data["read_every_s"]),
@@ -119,11 +133,12 @@ class RunstenClient:
         return HOSTED_PREFIX if self.hosted else CORE_PREFIX
 
     async def _get(self, path: str) -> Any:
+        token = self._token if isinstance(self._token, str) else await self._token()
         try:
             async with self._session.get(
                 self._url + path,
                 headers={
-                    "Authorization": f"Bearer {self._token}",
+                    "Authorization": f"Bearer {token}",
                     "Accept": "application/json",
                 },
                 timeout=TIMEOUT,

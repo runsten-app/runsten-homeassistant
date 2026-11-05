@@ -24,11 +24,17 @@ def _input(token: str = TOKEN, url: str = URL) -> dict:
 
 
 async def _start(hass: HomeAssistant) -> str:
+    """Start a flow, and choose the access token in its menu."""
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": SOURCE_USER}
     )
+    assert result["type"] is FlowResultType.MENU
+    assert result["menu_options"] == ["oauth", "token"]
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"], {"next_step_id": "token"}
+    )
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == "token"
     return result["flow_id"]
 
 
