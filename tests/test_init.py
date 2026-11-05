@@ -138,6 +138,19 @@ async def test_devices(
     assert tesla.manufacturer == "Tesla"
     assert tesla.sw_version == "2026.38.6"
     assert volvo.sw_version is None
+
+    # A later reading of the states alone follows an update of the software.
+    updated = copy.deepcopy(STATES)
+    updated[1]["software"]["value"] = "2026.44.1"
+    aioclient_mock.clear_requests()
+    mock_hosted(aioclient_mock, states=updated)
+    await entry.runtime_data.async_refresh()
+    await hass.async_block_till_done()
+    assert _device(hass, entry, TESLA_ID).sw_version == "2026.44.1"
+    assert [c[1].path for c in aioclient_mock.mock_calls] == [
+        "/api/cloud/homeassistant/states"
+    ]
+
     for device in dr.async_entries_for_config_entry(dr.async_get(hass), entry.entry_id):
         assert VIN not in str(device)
 
