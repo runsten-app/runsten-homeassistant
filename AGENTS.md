@@ -41,6 +41,8 @@ custom_components/runsten/
                      section); reauth of either kind; options (position)
   translations/      en, fr, sv: the same keys
   icons.json, manifest.json
+  brand/             the icon Home Assistant shows once installed (light and dark, 256 and
+                     512 px): Runsten's mark, the core's web/public/favicon.svg
 tests/               pytest-homeassistant-custom-component, the API mocked (aioclient_mock)
 ```
 
