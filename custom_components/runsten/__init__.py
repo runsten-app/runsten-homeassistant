@@ -72,8 +72,8 @@ async def _async_token_source(
         try:
             await session.async_ensure_token_valid()
         except aiohttp.ClientResponseError as err:
-            # Home Assistant's own helper, in recent versions (2026.10), starts the reauth of
-            # a 408: only 429 is transient there.
+            # A 408 reaches here as a plain error (RunstenImplementation), never
+            # Home Assistant's refusal, which would start the reauth.
             if 400 <= err.status < 500 and err.status not in (408, 429):
                 raise RunstenAuthError from err
             raise RunstenConnectionError(f"token renewal: HTTP {err.status}") from err

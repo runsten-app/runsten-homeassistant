@@ -3,13 +3,15 @@
 The client is public (no secret): its client_id is the URL of its metadata document,
 which registers My Home Assistant's address as its only redirection, whatever the
 instance's own address. Every request names the integration's API as the resource,
-which the access tokens then read only.
+which the access tokens then read only. A renewal that timed out is retried, never
+taken for a refusal.
 """
 
 from __future__ import annotations
 
 from typing import Any
 
+import aiohttp
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.config_entry_oauth2_flow import (
     MY_AUTH_CALLBACK_PATH,
@@ -53,3 +55,22 @@ class RunstenImplementation(LocalOAuth2ImplementationWithPkce):
     def extra_token_resolve_data(self) -> dict[str, Any]:
         """Exchange the code for a token of the integration's API, with PKCE."""
         return {**super().extra_token_resolve_data, "resource": OAUTH_RESOURCE}
+
+    async def async_refresh_token(self, token: dict) -> dict:
+        """Renew the tokens; a 408 stays a plain HTTP error, which retries.
+
+        Recent Home Assistant takes every 4xx but 429 for a refusal, and starts the
+        reauth: a request that timed out is not one.
+        """
+        try:
+            return await super().async_refresh_token(token)
+        except aiohttp.ClientResponseError as err:
+            if err.status != 408:
+                raise
+            raise aiohttp.ClientResponseError(
+                err.request_info,
+                err.history,
+                status=err.status,
+                message=err.message,
+                headers=err.headers,
+            ) from err

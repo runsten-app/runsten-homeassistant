@@ -238,6 +238,7 @@ async def test_valid_token_not_renewed(
     [
         (400, ConfigEntryState.SETUP_ERROR, True),
         (500, ConfigEntryState.SETUP_RETRY, False),
+        (408, ConfigEntryState.SETUP_RETRY, False),
         (429, ConfigEntryState.SETUP_RETRY, False),
     ],
 )
@@ -274,9 +275,8 @@ async def test_renewal_refused(
 async def test_renewal_errors(
     hass: HomeAssistant, status: int, error: type[Exception]
 ) -> None:
-    """The integration's own reading of a renewal's status, whatever Home Assistant's
-    helper does first (recent versions start the reauth of a 408 themselves): only a
-    refusal asks to sign in again, not a timeout or a rate limit.
+    """The integration's own reading of a renewal's status: only a refusal asks to
+    sign in again, not a timeout or a rate limit.
     """
     async_register_implementation(hass, DOMAIN, RunstenImplementation(hass))
     entry = oauth_entry(expires_in=-10)
