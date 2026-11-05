@@ -87,6 +87,7 @@ class RunstenCoordinator(DataUpdateCoordinator[RunstenData]):
                 self._details_at = now
                 data = RunstenData(account, vehicles, states, labels(vehicles))
                 self._details_changed(data)
+                self._software_changed(data)
                 return data
         except RunstenAuthError as err:
             raise ConfigEntryAuthFailed(
@@ -102,7 +103,19 @@ class RunstenCoordinator(DataUpdateCoordinator[RunstenData]):
                 translation_key="cannot_connect",
                 translation_placeholders={"error": str(err)},
             ) from err
-        return RunstenData(previous.account, previous.vehicles, states, previous.labels)
+        data = RunstenData(previous.account, previous.vehicles, states, previous.labels)
+        self._software_changed(data)
+        return data
+
+    def _software_changed(self, data: RunstenData) -> None:
+        """Give each device the version of its vehicle's software, where told."""
+        registry = dr.async_get(self.hass)
+        for vehicle_id in data.vehicles:
+            device = registry.async_get_device(identifiers={(DOMAIN, vehicle_id)})
+            software = (data.states.get(vehicle_id) or {}).get("software") or {}
+            version = software.get("value")
+            if device is not None and device.sw_version != version:
+                registry.async_update_device(device.id, sw_version=version)
 
     def _details_changed(self, data: RunstenData) -> None:
         """Name the devices, remove those of the vehicles gone, and tell a Free account."""

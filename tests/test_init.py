@@ -121,7 +121,10 @@ async def test_entities(
 async def test_devices(
     hass: HomeAssistant, aioclient_mock: AiohttpClientMocker
 ) -> None:
-    """A device per vehicle, named as the web interface does, never by its VIN."""
+    """A device per vehicle, named as the web interface does, never by its VIN.
+
+    Its software version is the vehicle's, where the vehicle tells it.
+    """
     mock_hosted(aioclient_mock)
     entry = hosted_entry()
     await setup(hass, entry)
@@ -133,6 +136,21 @@ async def test_devices(
     tesla = _device(hass, entry, TESLA_ID)
     assert tesla.name == "Blixten"
     assert tesla.manufacturer == "Tesla"
+    assert tesla.sw_version == "2026.38.6"
+    assert volvo.sw_version is None
+
+    # A later reading of the states alone follows an update of the software.
+    updated = copy.deepcopy(STATES)
+    updated[1]["software"]["value"] = "2026.44.1"
+    aioclient_mock.clear_requests()
+    mock_hosted(aioclient_mock, states=updated)
+    await entry.runtime_data.async_refresh()
+    await hass.async_block_till_done()
+    assert _device(hass, entry, TESLA_ID).sw_version == "2026.44.1"
+    assert [c[1].path for c in aioclient_mock.mock_calls] == [
+        "/api/cloud/homeassistant/states"
+    ]
+
     for device in dr.async_entries_for_config_entry(dr.async_get(hass), entry.entry_id):
         assert VIN not in str(device)
 
