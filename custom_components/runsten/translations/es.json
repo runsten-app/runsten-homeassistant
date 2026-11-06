@@ -1,0 +1,220 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Conectar con Runsten",
+        "description": "Inicie sesión con su cuenta de Runsten en my.runsten.app o pegue un token de acceso: para una instancia que usted mismo aloja, o para conectarse sin iniciar sesión.",
+        "menu_options": {
+          "oauth": "Iniciar sesión con Runsten",
+          "token": "Usar un token de acceso"
+        }
+      },
+      "token": {
+        "title": "Conectar con un token de acceso",
+        "description": "Pegue un token de acceso personal de su cuenta de Runsten: en Runsten, Configuración, Acceso a la API, Nuevo token de acceso. Solo lee sus datos y puede revocarlo allí mismo.",
+        "data": {
+          "token": "Token de acceso"
+        },
+        "data_description": {
+          "token": "Empieza por rst_."
+        },
+        "sections": {
+          "advanced": {
+            "name": "Configuración avanzada",
+            "data": {
+              "url": "URL de Runsten"
+            },
+            "data_description": {
+              "url": "Conserve {default_url}, salvo que aloje Runsten usted mismo: en ese caso, la dirección de su instancia."
+            }
+          }
+        }
+      },
+      "reauth_confirm": {
+        "title": "Runsten rechazó el token de acceso",
+        "description": "El token de acceso de {url} fue revocado o ha caducado. Pegue uno nuevo: en Runsten, Configuración, Acceso a la API.",
+        "data": {
+          "token": "Token de acceso"
+        },
+        "data_description": {
+          "token": "Empieza por rst_."
+        }
+      },
+      "reauth_oauth": {
+        "title": "Volver a iniciar sesión en Runsten",
+        "description": "Runsten ya no permite que Home Assistant lea esta cuenta: se desconectó en Runsten, en Configuración, Aplicaciones conectadas, o no se ha usado en 30 días. Vuelva a iniciar sesión con la misma cuenta."
+      }
+    },
+    "error": {
+      "invalid_auth": "Runsten rechazó el token de acceso: puede que esté revocado o haya caducado.",
+      "cannot_connect": "No se pudo conectar con Runsten en esta dirección.",
+      "invalid_token": "Un token de acceso de Runsten empieza por rst_.",
+      "invalid_url": "Esta dirección no es válida."
+    },
+    "abort": {
+      "already_configured": "Esta cuenta ya está conectada.",
+      "reauth_successful": "El acceso se renovó correctamente.",
+      "wrong_account": "Esta es otra cuenta de Runsten: inicie sesión con la cuenta de esta entrada.",
+      "cannot_connect": "No se pudo conectar con Runsten.",
+      "missing_configuration": "El inicio de sesión con Runsten no está disponible.",
+      "oauth_implementation_unavailable": "El inicio de sesión con Runsten no está disponible.",
+      "authorize_url_timeout": "No se pudo preparar a tiempo la página de inicio de sesión de Runsten.",
+      "no_url_available": "Home Assistant no tiene ninguna URL a la que volver después de iniciar sesión.",
+      "user_rejected_authorize": "Se rechazó el inicio de sesión con Runsten: {error}",
+      "oauth_error": "La respuesta de Runsten al inicio de sesión no es válida.",
+      "oauth_failed": "No se pudieron obtener los tokens de Runsten.",
+      "oauth_timeout": "No se pudieron obtener a tiempo los tokens de Runsten.",
+      "oauth_unauthorized": "Runsten rechazó el inicio de sesión."
+    },
+    "create_entry": {
+      "default": "Conectado con Runsten."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opciones de Runsten",
+        "data": {
+          "track_location": "Seguir la posición de los vehículos"
+        },
+        "data_description": {
+          "track_location": "Un rastreador de dispositivo por vehículo, en su última posición conocida. Si se desactiva, los rastreadores se eliminan."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "range": {
+        "name": "Autonomía"
+      },
+      "charging_status": {
+        "name": "Estado de carga",
+        "state": {
+          "idle": "Inactivo",
+          "charging": "Cargando",
+          "done": "Hecho",
+          "scheduled": "Programado",
+          "discharging": "Descargando",
+          "error": "Error"
+        }
+      },
+      "charge_type": {
+        "name": "Tipo de carga",
+        "state": {
+          "ac": "CA",
+          "dc": "CC",
+          "none": "Ninguno"
+        }
+      },
+      "charging_power": {
+        "name": "Potencia de carga"
+      },
+      "target_soc": {
+        "name": "Límite de carga"
+      },
+      "odometer": {
+        "name": "Cuentakilómetros"
+      },
+      "read_at": {
+        "name": "Última lectura"
+      },
+      "outside_temperature": {
+        "name": "Temperatura exterior"
+      },
+      "cabin_temperature": {
+        "name": "Temperatura del habitáculo"
+      },
+      "openings_read_at": {
+        "name": "Última lectura de las puertas"
+      }
+    },
+    "binary_sensor": {
+      "plug": {
+        "name": "Cable de carga"
+      },
+      "charging": {
+        "name": "Cargando"
+      },
+      "engine": {
+        "name": "Motor"
+      },
+      "credential": {
+        "name": "Credencial"
+      },
+      "climate": {
+        "name": "Climatización"
+      },
+      "preconditioning": {
+        "name": "Preacondicionamiento"
+      },
+      "battery_heater": {
+        "name": "Calentador de batería"
+      },
+      "lock": {
+        "name": "Cerradura"
+      },
+      "door_front_left": {
+        "name": "Puerta delantera izquierda"
+      },
+      "door_front_right": {
+        "name": "Puerta delantera derecha"
+      },
+      "door_rear_left": {
+        "name": "Puerta trasera izquierda"
+      },
+      "door_rear_right": {
+        "name": "Puerta trasera derecha"
+      },
+      "hood": {
+        "name": "Capó"
+      },
+      "tailgate": {
+        "name": "Portón trasero"
+      },
+      "tank_lid": {
+        "name": "Tapa del depósito"
+      },
+      "window_front_left": {
+        "name": "Ventanilla delantera izquierda"
+      },
+      "window_front_right": {
+        "name": "Ventanilla delantera derecha"
+      },
+      "window_rear_left": {
+        "name": "Ventanilla trasera izquierda"
+      },
+      "window_rear_right": {
+        "name": "Ventanilla trasera derecha"
+      },
+      "sunroof": {
+        "name": "Techo solar"
+      },
+      "sentry": {
+        "name": "Modo centinela"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Ubicación"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Runsten rechazó el token de acceso."
+    },
+    "rate_limited": {
+      "message": "Demasiadas solicitudes a Runsten con este token de acceso; se reintentará más tarde."
+    },
+    "cannot_connect": {
+      "message": "No se pudo leer Runsten: {error}"
+    }
+  },
+  "issues": {
+    "free_plan": {
+      "title": "Runsten Free lee sus vehículos cada {minutes} minutos",
+      "description": "Su cuenta de Runsten está en Free: sus vehículos se leen cada {minutes} minutos, por lo que sus valores solo cambian aquí con esa frecuencia y una automatización puede ejecutarse con retraso. Plus los lee en tiempo real, cada minuto durante la conducción o la carga.\n\nPuede ignorar este mensaje: la integración funciona igual."
+    }
+  }
+}
