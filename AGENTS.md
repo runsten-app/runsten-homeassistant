@@ -56,8 +56,9 @@ tests/               pytest-homeassistant-custom-component, the API mocked (aioc
   VIN. The VIN is never shown, logged or stored.
 - **One request a minute per account** (`states`); nothing polls faster: Runsten reads a vehicle
   once a minute at best.
-- **Translations**: English, French and Swedish together, the same keys, no URL in a string
-  (hassfest refuses it: a placeholder). Runsten's offers are Free/Plus, Gratuit/Plus, Gratis/Plus.
+- **Translations**: English, French, Italian and Swedish together, the same keys, no URL in a
+  string (hassfest refuses it: a placeholder). Runsten's offers are Free/Plus, Gratuit/Plus,
+  Gratis/Plus (Italian and Swedish alike).
 - Current Home Assistant idioms: `probatio` (imported as `vol`, voluptuous as fallback), sections
   rather than advanced mode, `OptionsFlowWithReload`, `entry.runtime_data`. The minimum version
   is `hacs.json`'s `homeassistant`.
