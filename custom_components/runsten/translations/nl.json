@@ -100,7 +100,7 @@
         }
       },
       "charge_type": {
-        "name": "Type oplader",
+        "name": "Laadtype",
         "state": {
           "ac": "AC",
           "dc": "DC",
@@ -173,7 +173,7 @@
         "name": "Achterklep"
       },
       "tank_lid": {
-        "name": "Tankdop"
+        "name": "Tankklep"
       },
       "window_front_left": {
         "name": "Raam linksvoor"
