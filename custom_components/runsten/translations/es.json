@@ -60,7 +60,7 @@
       "oauth_implementation_unavailable": "El inicio de sesión con Runsten no está disponible.",
       "authorize_url_timeout": "No se pudo preparar a tiempo la página de inicio de sesión de Runsten.",
       "no_url_available": "Home Assistant no tiene ninguna URL a la que volver después de iniciar sesión.",
-      "user_rejected_authorize": "Runsten rechazó el inicio de sesión: {error}",
+      "user_rejected_authorize": "Se rechazó el inicio de sesión con Runsten: {error}",
       "oauth_error": "La respuesta de Runsten al inicio de sesión no es válida.",
       "oauth_failed": "No se pudieron obtener los tokens de Runsten.",
       "oauth_timeout": "No se pudieron obtener a tiempo los tokens de Runsten.",
