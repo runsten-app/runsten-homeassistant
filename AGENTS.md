@@ -39,7 +39,7 @@ custom_components/runsten/
   sensor.py, binary_sensor.py, device_tracker.py
   config_flow.py     menu: sign in with Runsten (OAuth) or the token form (URL in a collapsed
                      section); reauth of either kind; options (position)
-  translations/      en, fr, sv, es, de, nl: the same keys
+  translations/      en, fr, sv, es, de, nl, nb: the same keys
   icons.json, manifest.json
   brand/             the icon Home Assistant shows once installed (light and dark, 256 and
                      512 px): Runsten's mark, the core's web/public/favicon.svg
@@ -56,9 +56,10 @@ tests/               pytest-homeassistant-custom-component, the API mocked (aioc
   VIN. The VIN is never shown, logged or stored.
 - **One request a minute per account** (`states`); nothing polls faster: Runsten reads a vehicle
   once a minute at best.
-- **Translations**: English, French, Swedish, Spanish, German and Dutch together, the same keys, no URL
-  in a string (hassfest refuses it: a placeholder). Runsten's offers are Free/Plus, Gratuit/Plus,
-  Gratis/Plus, Free/Plus (Spanish), Free/Plus (German), Free/Plus (Dutch).
+- **Translations**: English, French, Swedish, Spanish, German, Dutch and Norwegian (Bokmål)
+  together, the same keys, no URL in a string (hassfest refuses it: a placeholder). Runsten's offers
+  are Free/Plus, Gratuit/Plus, Gratis/Plus, Free/Plus (Spanish), Free/Plus (German), Free/Plus
+  (Dutch), Free/Plus (Norwegian).
 - Current Home Assistant idioms: `probatio` (imported as `vol`, voluptuous as fallback), sections
   rather than advanced mode, `OptionsFlowWithReload`, `entry.runtime_data`. The minimum version
   is `hacs.json`'s `homeassistant`.

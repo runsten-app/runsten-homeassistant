@@ -56,7 +56,7 @@ reviews:
     - path: "custom_components/runsten/**"
       instructions: "Current Home Assistant idioms (async only, no blocking I/O in the event loop, entry.runtime_data, OptionsFlowWithReload, sections). Entities mirror the core's MQTT discovery: same names, device classes and units. Unknown is None, never a zero or an off. The VIN is never shown, logged or stored. Nothing polls faster than one request a minute per account."
     - path: "custom_components/runsten/translations/**"
-      instructions: "English, French and Swedish together, with the same keys; no URL in a string (a placeholder instead)."
+      instructions: "English, French, Swedish, Spanish, German, Dutch and Norwegian (Bokmål) together, with the same keys; no URL in a string (a placeholder instead)."
     - path: "tests/**"
       instructions: "pytest-homeassistant-custom-component, the API mocked with aioclient_mock: no real network call."
 
