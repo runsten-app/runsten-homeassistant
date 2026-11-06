@@ -1,0 +1,220 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Verbinden met Runsten",
+        "description": "Meld u aan met uw Runsten-account op my.runsten.app, of plak een toegangstoken: voor een instantie die u zelf host, of om te verbinden zonder aan te melden.",
+        "menu_options": {
+          "oauth": "Aanmelden bij Runsten",
+          "token": "Een toegangstoken gebruiken"
+        }
+      },
+      "token": {
+        "title": "Verbinden met een toegangstoken",
+        "description": "Plak een persoonlijk toegangstoken van uw Runsten-account: in Runsten, Instellingen, API-toegang, Nieuw toegangstoken. Het kan alleen uw gegevens lezen, en u kunt het daar intrekken.",
+        "data": {
+          "token": "Toegangstoken"
+        },
+        "data_description": {
+          "token": "Begint met rst_."
+        },
+        "sections": {
+          "advanced": {
+            "name": "Geavanceerde instellingen",
+            "data": {
+              "url": "Runsten-URL"
+            },
+            "data_description": {
+              "url": "Behoud {default_url}, tenzij u Runsten zelf host: geef dan het adres van uw instantie op."
+            }
+          }
+        }
+      },
+      "reauth_confirm": {
+        "title": "Runsten heeft het toegangstoken geweigerd",
+        "description": "Het toegangstoken van {url} is ingetrokken of verlopen. Plak een nieuw: in Runsten, Instellingen, API-toegang.",
+        "data": {
+          "token": "Toegangstoken"
+        },
+        "data_description": {
+          "token": "Begint met rst_."
+        }
+      },
+      "reauth_oauth": {
+        "title": "Opnieuw aanmelden bij Runsten",
+        "description": "Runsten laat Home Assistant dit account niet meer lezen: de verbinding is verbroken in Runsten, onder Instellingen, Gekoppelde apps, of 30 dagen niet gebruikt. Meld u opnieuw aan met hetzelfde account."
+      }
+    },
+    "error": {
+      "invalid_auth": "Runsten heeft het toegangstoken geweigerd: het is misschien ingetrokken of verlopen.",
+      "cannot_connect": "Runsten is op dit adres niet bereikbaar.",
+      "invalid_token": "Een toegangstoken van Runsten begint met rst_.",
+      "invalid_url": "Dit is geen geldig adres."
+    },
+    "abort": {
+      "already_configured": "Dit account is al verbonden.",
+      "reauth_successful": "De toegang is vernieuwd.",
+      "wrong_account": "Dit is een ander Runsten-account: meld u aan met het account van deze vermelding.",
+      "cannot_connect": "Runsten is niet bereikbaar.",
+      "missing_configuration": "Aanmelden bij Runsten is niet beschikbaar.",
+      "oauth_implementation_unavailable": "Aanmelden bij Runsten is niet beschikbaar.",
+      "authorize_url_timeout": "De aanmeldpagina van Runsten kon niet op tijd worden voorbereid.",
+      "no_url_available": "Home Assistant heeft geen URL om na het aanmelden naar terug te keren.",
+      "user_rejected_authorize": "Aanmelden bij Runsten is geweigerd: {error}",
+      "oauth_error": "Het antwoord van Runsten op de aanmelding is niet geldig.",
+      "oauth_failed": "De tokens van Runsten konden niet worden verkregen.",
+      "oauth_timeout": "De tokens van Runsten konden niet op tijd worden verkregen.",
+      "oauth_unauthorized": "Runsten heeft de aanmelding geweigerd."
+    },
+    "create_entry": {
+      "default": "Verbonden met Runsten."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opties van Runsten",
+        "data": {
+          "track_location": "De positie van de voertuigen volgen"
+        },
+        "data_description": {
+          "track_location": "Een apparaattracker per voertuig, op de laatst bekende positie. Uitgeschakeld worden de trackers verwijderd."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "range": {
+        "name": "Actieradius"
+      },
+      "charging_status": {
+        "name": "Oplaadstatus",
+        "state": {
+          "idle": "Inactief",
+          "charging": "Opladen",
+          "done": "Klaar",
+          "scheduled": "Gepland",
+          "discharging": "Ontladen",
+          "error": "Fout"
+        }
+      },
+      "charge_type": {
+        "name": "Type oplader",
+        "state": {
+          "ac": "AC",
+          "dc": "DC",
+          "none": "Geen"
+        }
+      },
+      "charging_power": {
+        "name": "Oplaadvermogen"
+      },
+      "target_soc": {
+        "name": "Laadlimiet"
+      },
+      "odometer": {
+        "name": "Kilometerstand"
+      },
+      "read_at": {
+        "name": "Laatst uitgelezen"
+      },
+      "outside_temperature": {
+        "name": "Buitentemperatuur"
+      },
+      "cabin_temperature": {
+        "name": "Binnentemperatuur"
+      },
+      "openings_read_at": {
+        "name": "Deuren laatst uitgelezen"
+      }
+    },
+    "binary_sensor": {
+      "plug": {
+        "name": "Oplaadkabel"
+      },
+      "charging": {
+        "name": "Opladen"
+      },
+      "engine": {
+        "name": "Motor"
+      },
+      "credential": {
+        "name": "Toegangsgegevens"
+      },
+      "climate": {
+        "name": "Klimaat"
+      },
+      "preconditioning": {
+        "name": "Voorconditionering"
+      },
+      "battery_heater": {
+        "name": "Batterijverwarming"
+      },
+      "lock": {
+        "name": "Slot"
+      },
+      "door_front_left": {
+        "name": "Deur linksvoor"
+      },
+      "door_front_right": {
+        "name": "Deur rechtsvoor"
+      },
+      "door_rear_left": {
+        "name": "Deur linksachter"
+      },
+      "door_rear_right": {
+        "name": "Deur rechtsachter"
+      },
+      "hood": {
+        "name": "Motorkap"
+      },
+      "tailgate": {
+        "name": "Achterklep"
+      },
+      "tank_lid": {
+        "name": "Tankdop"
+      },
+      "window_front_left": {
+        "name": "Raam linksvoor"
+      },
+      "window_front_right": {
+        "name": "Raam rechtsvoor"
+      },
+      "window_rear_left": {
+        "name": "Raam linksachter"
+      },
+      "window_rear_right": {
+        "name": "Raam rechtsachter"
+      },
+      "sunroof": {
+        "name": "Zonnedak"
+      },
+      "sentry": {
+        "name": "Schildwachtmodus"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Locatie"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Runsten heeft het toegangstoken geweigerd."
+    },
+    "rate_limited": {
+      "message": "Te veel verzoeken aan Runsten met dit toegangstoken; er wordt later opnieuw geprobeerd."
+    },
+    "cannot_connect": {
+      "message": "Runsten kon niet worden gelezen: {error}"
+    }
+  },
+  "issues": {
+    "free_plan": {
+      "title": "Runsten Free leest uw voertuigen elke {minutes} minuten uit",
+      "description": "Uw Runsten-account heeft Free: de voertuigen worden elke {minutes} minuten uitgelezen, dus hun waarden veranderen hier maar zo vaak, en een automatisering kan te laat uitvoeren. Plus leest ze in realtime uit, elke minuut tijdens het rijden of laden.\n\nU kunt dit bericht negeren: de integratie werkt hetzelfde."
+    }
+  }
+}
