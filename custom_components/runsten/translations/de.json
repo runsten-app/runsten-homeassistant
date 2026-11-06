@@ -1,0 +1,220 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Mit Runsten verbinden",
+        "description": "Melden Sie sich mit Ihrem Runsten-Konto auf my.runsten.app an, oder fügen Sie ein Zugriffstoken ein: für eine selbst gehostete Instanz oder um sich ohne Anmeldung zu verbinden.",
+        "menu_options": {
+          "oauth": "Mit Runsten anmelden",
+          "token": "Zugriffstoken verwenden"
+        }
+      },
+      "token": {
+        "title": "Mit einem Zugriffstoken verbinden",
+        "description": "Fügen Sie ein persönliches Zugriffstoken Ihres Runsten-Kontos ein: in Runsten unter Einstellungen, API-Zugriff, Neues Zugriffstoken. Es kann Ihre Daten nur lesen, und Sie können es dort widerrufen.",
+        "data": {
+          "token": "Zugriffstoken"
+        },
+        "data_description": {
+          "token": "Beginnt mit rst_."
+        },
+        "sections": {
+          "advanced": {
+            "name": "Erweiterte Einstellungen",
+            "data": {
+              "url": "Runsten-URL"
+            },
+            "data_description": {
+              "url": "Behalten Sie {default_url}, außer Sie hosten Runsten selbst: dann die Adresse Ihrer Instanz."
+            }
+          }
+        }
+      },
+      "reauth_confirm": {
+        "title": "Runsten hat das Zugriffstoken abgelehnt",
+        "description": "Das Zugriffstoken von {url} wurde widerrufen oder ist abgelaufen. Fügen Sie ein neues ein: in Runsten unter Einstellungen, API-Zugriff.",
+        "data": {
+          "token": "Zugriffstoken"
+        },
+        "data_description": {
+          "token": "Beginnt mit rst_."
+        }
+      },
+      "reauth_oauth": {
+        "title": "Erneut bei Runsten anmelden",
+        "description": "Runsten erlaubt Home Assistant nicht mehr, dieses Konto zu lesen: Es wurde in Runsten unter Einstellungen, Verbundene Apps getrennt oder 30 Tage lang nicht verwendet. Melden Sie sich erneut mit demselben Konto an."
+      }
+    },
+    "error": {
+      "invalid_auth": "Runsten hat das Zugriffstoken abgelehnt: Es wurde vielleicht widerrufen oder ist abgelaufen.",
+      "cannot_connect": "Runsten ist unter dieser Adresse nicht erreichbar.",
+      "invalid_token": "Ein Runsten-Zugriffstoken beginnt mit rst_.",
+      "invalid_url": "Das ist keine gültige Adresse."
+    },
+    "abort": {
+      "already_configured": "Dieses Konto ist bereits verbunden.",
+      "reauth_successful": "Der Zugriff wurde erneuert.",
+      "wrong_account": "Das ist ein anderes Runsten-Konto: Melden Sie sich mit dem Konto dieses Eintrags an.",
+      "cannot_connect": "Runsten ist nicht erreichbar.",
+      "missing_configuration": "Die Anmeldung mit Runsten ist nicht verfügbar.",
+      "oauth_implementation_unavailable": "Die Anmeldung mit Runsten ist nicht verfügbar.",
+      "authorize_url_timeout": "Die Anmeldeseite von Runsten konnte nicht rechtzeitig vorbereitet werden.",
+      "no_url_available": "Home Assistant hat keine URL, zu der es nach der Anmeldung zurückkehren kann.",
+      "user_rejected_authorize": "Die Anmeldung mit Runsten wurde abgelehnt: {error}",
+      "oauth_error": "Die Antwort von Runsten auf die Anmeldung ist ungültig.",
+      "oauth_failed": "Die Tokens von Runsten konnten nicht abgerufen werden.",
+      "oauth_timeout": "Die Tokens von Runsten konnten nicht rechtzeitig abgerufen werden.",
+      "oauth_unauthorized": "Runsten hat die Anmeldung abgelehnt."
+    },
+    "create_entry": {
+      "default": "Mit Runsten verbunden."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Runsten-Optionen",
+        "data": {
+          "track_location": "Position der Fahrzeuge verfolgen"
+        },
+        "data_description": {
+          "track_location": "Ein Device-Tracker für jedes Fahrzeug, an seiner letzten bekannten Position. Ausgeschaltet werden die Tracker entfernt."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "range": {
+        "name": "Reichweite"
+      },
+      "charging_status": {
+        "name": "Ladestatus",
+        "state": {
+          "idle": "Inaktiv",
+          "charging": "Lädt",
+          "done": "Abgeschlossen",
+          "scheduled": "Geplant",
+          "discharging": "Entlädt",
+          "error": "Fehler"
+        }
+      },
+      "charge_type": {
+        "name": "Ladetyp",
+        "state": {
+          "ac": "AC",
+          "dc": "DC",
+          "none": "Keiner"
+        }
+      },
+      "charging_power": {
+        "name": "Ladeleistung"
+      },
+      "target_soc": {
+        "name": "Ladelimit"
+      },
+      "odometer": {
+        "name": "Kilometerstand"
+      },
+      "read_at": {
+        "name": "Zuletzt gelesen"
+      },
+      "outside_temperature": {
+        "name": "Außentemperatur"
+      },
+      "cabin_temperature": {
+        "name": "Innenraumtemperatur"
+      },
+      "openings_read_at": {
+        "name": "Türen zuletzt gelesen"
+      }
+    },
+    "binary_sensor": {
+      "plug": {
+        "name": "Stecker"
+      },
+      "charging": {
+        "name": "Laden"
+      },
+      "engine": {
+        "name": "Motor"
+      },
+      "credential": {
+        "name": "Zugangsdaten"
+      },
+      "climate": {
+        "name": "Klimatisierung"
+      },
+      "preconditioning": {
+        "name": "Vorkonditionierung"
+      },
+      "battery_heater": {
+        "name": "Batterieheizung"
+      },
+      "lock": {
+        "name": "Schloss"
+      },
+      "door_front_left": {
+        "name": "Tür vorne links"
+      },
+      "door_front_right": {
+        "name": "Tür vorne rechts"
+      },
+      "door_rear_left": {
+        "name": "Tür hinten links"
+      },
+      "door_rear_right": {
+        "name": "Tür hinten rechts"
+      },
+      "hood": {
+        "name": "Motorhaube"
+      },
+      "tailgate": {
+        "name": "Heckklappe"
+      },
+      "tank_lid": {
+        "name": "Tankklappe"
+      },
+      "window_front_left": {
+        "name": "Fenster vorne links"
+      },
+      "window_front_right": {
+        "name": "Fenster vorne rechts"
+      },
+      "window_rear_left": {
+        "name": "Fenster hinten links"
+      },
+      "window_rear_right": {
+        "name": "Fenster hinten rechts"
+      },
+      "sunroof": {
+        "name": "Schiebedach"
+      },
+      "sentry": {
+        "name": "Wächter-Modus"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Standort"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Runsten hat das Zugriffstoken abgelehnt."
+    },
+    "rate_limited": {
+      "message": "Zu viele Anfragen an Runsten mit diesem Zugriffstoken; neuer Versuch später."
+    },
+    "cannot_connect": {
+      "message": "Runsten konnte nicht gelesen werden: {error}"
+    }
+  },
+  "issues": {
+    "free_plan": {
+      "title": "Runsten Free liest Ihre Fahrzeuge alle {minutes} Minuten",
+      "description": "Ihr Runsten-Konto nutzt Free: Seine Fahrzeuge werden alle {minutes} Minuten gelesen, daher ändern sich ihre Werte hier nur so oft, und eine Automatisierung kann verspätet laufen. Plus liest sie in Echtzeit, jede Minute während der Fahrt oder beim Laden.\n\nSie können diese Meldung ignorieren: Die Integration funktioniert genauso."
+    }
+  }
+}
