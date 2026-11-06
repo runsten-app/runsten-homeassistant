@@ -1,0 +1,220 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Koble til Runsten",
+        "description": "Logg inn med Runsten-kontoen din på my.runsten.app, eller lim inn et tilgangstoken: for en instans du drifter selv, eller for å koble til uten å logge inn.",
+        "menu_options": {
+          "oauth": "Logg inn med Runsten",
+          "token": "Bruk et tilgangstoken"
+        }
+      },
+      "token": {
+        "title": "Koble til med et tilgangstoken",
+        "description": "Lim inn et personlig tilgangstoken fra Runsten-kontoen din: i Runsten, Innstillinger, API-tilgang, Nytt tilgangstoken. Det kan bare lese dataene dine, og du kan tilbakekalle det der.",
+        "data": {
+          "token": "Tilgangstoken"
+        },
+        "data_description": {
+          "token": "Starter med rst_."
+        },
+        "sections": {
+          "advanced": {
+            "name": "Avanserte innstillinger",
+            "data": {
+              "url": "Runsten-URL"
+            },
+            "data_description": {
+              "url": "Behold {default_url}, med mindre du drifter Runsten selv: da adressen til instansen din."
+            }
+          }
+        }
+      },
+      "reauth_confirm": {
+        "title": "Runsten avviste tilgangstokenet",
+        "description": "Tilgangstokenet for {url} er tilbakekalt eller har utløpt. Lim inn et nytt: i Runsten, Innstillinger, API-tilgang.",
+        "data": {
+          "token": "Tilgangstoken"
+        },
+        "data_description": {
+          "token": "Starter med rst_."
+        }
+      },
+      "reauth_oauth": {
+        "title": "Logg inn på Runsten igjen",
+        "description": "Runsten lar ikke lenger Home Assistant lese denne kontoen: den ble koblet fra i Runsten, under Innstillinger, Tilkoblede apper, eller har ikke vært brukt på 30 dager. Logg inn igjen med samme konto."
+      }
+    },
+    "error": {
+      "invalid_auth": "Runsten avviste tilgangstokenet: det kan være tilbakekalt eller utløpt.",
+      "cannot_connect": "Fikk ikke kontakt med Runsten på denne adressen.",
+      "invalid_token": "Et tilgangstoken for Runsten starter med rst_.",
+      "invalid_url": "Dette er ikke en gyldig adresse."
+    },
+    "abort": {
+      "already_configured": "Denne kontoen er allerede koblet til.",
+      "reauth_successful": "Tilgangen er fornyet.",
+      "wrong_account": "Dette er en annen Runsten-konto: logg inn med kontoen til denne oppføringen.",
+      "cannot_connect": "Fikk ikke kontakt med Runsten.",
+      "missing_configuration": "Innlogging med Runsten er ikke tilgjengelig.",
+      "oauth_implementation_unavailable": "Innlogging med Runsten er ikke tilgjengelig.",
+      "authorize_url_timeout": "Innloggingssiden til Runsten kunne ikke klargjøres i tide.",
+      "no_url_available": "Home Assistant har ingen URL å gå tilbake til etter innloggingen.",
+      "user_rejected_authorize": "Innlogging med Runsten ble avvist: {error}",
+      "oauth_error": "Svaret fra Runsten på innloggingen er ikke gyldig.",
+      "oauth_failed": "Tokenene fra Runsten kunne ikke hentes.",
+      "oauth_timeout": "Tokenene fra Runsten kunne ikke hentes i tide.",
+      "oauth_unauthorized": "Runsten avviste innloggingen."
+    },
+    "create_entry": {
+      "default": "Koblet til Runsten."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Alternativer for Runsten",
+        "data": {
+          "track_location": "Spor posisjonen til kjøretøyene"
+        },
+        "data_description": {
+          "track_location": "En enhetssporing for hvert kjøretøy, på siste kjente posisjon. Når det er slått av, fjernes sporingene."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "range": {
+        "name": "Rekkevidde"
+      },
+      "charging_status": {
+        "name": "Ladestatus",
+        "state": {
+          "idle": "Inaktiv",
+          "charging": "Lader",
+          "done": "Ferdig",
+          "scheduled": "Planlagt",
+          "discharging": "Lader ut",
+          "error": "Feil"
+        }
+      },
+      "charge_type": {
+        "name": "Type lading",
+        "state": {
+          "ac": "AC",
+          "dc": "DC",
+          "none": "Ingen"
+        }
+      },
+      "charging_power": {
+        "name": "Ladeeffekt"
+      },
+      "target_soc": {
+        "name": "Ladegrense"
+      },
+      "odometer": {
+        "name": "Kilometerteller"
+      },
+      "read_at": {
+        "name": "Sist lest"
+      },
+      "outside_temperature": {
+        "name": "Utetemperatur"
+      },
+      "cabin_temperature": {
+        "name": "Kupétemperatur"
+      },
+      "openings_read_at": {
+        "name": "Dører sist lest"
+      }
+    },
+    "binary_sensor": {
+      "plug": {
+        "name": "Ladekabel"
+      },
+      "charging": {
+        "name": "Lader"
+      },
+      "engine": {
+        "name": "Motor"
+      },
+      "credential": {
+        "name": "Legitimasjon"
+      },
+      "climate": {
+        "name": "Klima"
+      },
+      "preconditioning": {
+        "name": "Forhåndsklimatisering"
+      },
+      "battery_heater": {
+        "name": "Batterivarmer"
+      },
+      "lock": {
+        "name": "Lås"
+      },
+      "door_front_left": {
+        "name": "Dør foran venstre"
+      },
+      "door_front_right": {
+        "name": "Dør foran høyre"
+      },
+      "door_rear_left": {
+        "name": "Dør bak venstre"
+      },
+      "door_rear_right": {
+        "name": "Dør bak høyre"
+      },
+      "hood": {
+        "name": "Panser"
+      },
+      "tailgate": {
+        "name": "Bakluke"
+      },
+      "tank_lid": {
+        "name": "Tanklokk"
+      },
+      "window_front_left": {
+        "name": "Vindu foran venstre"
+      },
+      "window_front_right": {
+        "name": "Vindu foran høyre"
+      },
+      "window_rear_left": {
+        "name": "Vindu bak venstre"
+      },
+      "window_rear_right": {
+        "name": "Vindu bak høyre"
+      },
+      "sunroof": {
+        "name": "Soltak"
+      },
+      "sentry": {
+        "name": "Vaktmodus"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Posisjon"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Runsten avviste tilgangstokenet."
+    },
+    "rate_limited": {
+      "message": "For mange forespørsler til Runsten med dette tilgangstokenet; prøver igjen senere."
+    },
+    "cannot_connect": {
+      "message": "Kunne ikke lese Runsten: {error}"
+    }
+  },
+  "issues": {
+    "free_plan": {
+      "title": "Runsten Free leser kjøretøyene dine hvert {minutes}. minutt",
+      "description": "Runsten-kontoen din har Free: kjøretøyene leses hvert {minutes}. minutt, så verdiene endres bare så ofte her, og en automasjon kan kjøre for sent. Plus leser dem i sanntid, hvert minutt under kjøring eller lading.\n\nDu kan se bort fra denne meldingen: integrasjonen fungerer på samme måte."
+    }
+  }
+}
