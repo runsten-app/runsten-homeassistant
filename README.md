@@ -12,8 +12,10 @@ database, never your car's API, so it does not count against your car's quotas.
 
 Requires Home Assistant 2025.8 or later (tested with 2026.10).
 
-- **Marketplace (Home Assistant 2026.11 and later) or HACS**: add this repository as a custom
-  repository of type *Integration*, then install **Runsten** and restart Home Assistant.
+- **Marketplace (Home Assistant 2026.11 and later) or HACS**: search for **Runsten**, install
+  it, then restart Home Assistant.
+- **If Runsten is not found there**: add this repository as a custom repository of type
+  *Integration*, then install **Runsten** and restart Home Assistant.
 - **By hand**: copy `custom_components/runsten` into your configuration's `custom_components`
   folder, then restart Home Assistant.
 
